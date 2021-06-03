@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { Card } from '@components/Card'
+import { CustomButton } from '@components/CustomButton'
+import { SECONDARY } from '@color'
+
 interface IStartGameScreenProps {
   [key: string]: any
 }
@@ -9,12 +12,12 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ children }) => {
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Start a New Game!</Text>
-      <Card>
+      <Card style={styles.inputContainer}>
         <Text>Select a Number</Text>
         <TextInput />
         <View style={styles.buttonContainer}>
-          <Button title="Reset" onPress={() => {}} />
-          <Button title="Confirm" onPress={() => {}} />
+          <CustomButton style={styles.resetButton}>Reset</CustomButton>
+          <CustomButton style={styles.button}>Confirm</CustomButton>
         </View>
       </Card>
     </View>
@@ -37,20 +40,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
+  button: {
+    width: 100,
+  },
+  resetButton: {
+    width: 100,
+    backgroundColor: SECONDARY,
+  },
   inputContainer: {
     width: 300,
     maxWidth: '80%',
-    alignItems: 'center',
-    padding: 20,
-    // FOR iOS
-    // shadowColor: 'black',
-    // shadowOffset: { width: 300, height: 3 },
-    // shadowOpacity: 0.26,
-    // shadowRadius: 6,
-    elevation: 5,
-    backgroundColor: 'white',
-    borderTopLeftRadius: 30,
-    borderBottomRightRadius: 30,
   },
 })
 

@@ -11,6 +11,8 @@ module.exports = function (api) {
           alias: {
             '@components': './src/components',
             '@screens': './src/screens',
+            '@constants/*': './src/constants/*',
+            '@color': './src/constants/color.ts',
           },
         },
       ],

@@ -6,7 +6,9 @@
     "paths": {
       "*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@screens/*": ["src/screens/*"]
+      "@screens/*": ["src/screens/*"],
+      "@constants/*": ["src/constants/*"],
+      "@color": ["src/constants/color.ts"]
     }
   }
 }

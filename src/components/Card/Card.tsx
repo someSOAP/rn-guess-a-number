@@ -1,14 +1,16 @@
 import React, { FC } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ViewStyle } from 'react-native'
 
-export const Card: FC = ({ children }) => {
-  return <View style={styles.card}>{children}</View>
+interface ICardProps {
+  style?: ViewStyle
+}
+
+export const Card: FC<ICardProps> = ({ children, style = {} }) => {
+  return <View style={{ ...styles.card, ...style }}>{children}</View>
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: 300,
-    maxWidth: '80%',
     alignItems: 'center',
     padding: 20,
 
@@ -21,8 +23,7 @@ const styles = StyleSheet.create({
     elevation: 5,
 
     backgroundColor: 'white',
-    borderTopLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    borderRadius: 10,
   },
 })
 

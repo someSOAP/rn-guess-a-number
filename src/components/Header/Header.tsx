@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-
+import { SECONDARY } from '@color'
 interface IHeaderProps {
   text?: string
 }
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 90,
     paddingTop: 36,
-    backgroundColor: '#f7287b',
+    backgroundColor: SECONDARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
