@@ -14,10 +14,10 @@ import { NumberContainer } from '@components/NumberContainer'
 import { SECONDARY } from '@color'
 
 interface IStartGameScreenProps {
-  [key: string]: any
+  onStartGame: (selectedNumber: number) => void
 }
 
-export const StartGameScreen: FC<IStartGameScreenProps> = ({ children }) => {
+export const StartGameScreen: FC<IStartGameScreenProps> = ({ onStartGame }) => {
   const [enteredValue, setEnteredValue] = useState<string>('')
   const [confirmed, setConfirmed] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number>(0)
@@ -27,6 +27,8 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ children }) => {
   }
 
   const hideKeyboard = () => Keyboard.dismiss()
+
+  const startGameHandler = () => onStartGame(selectedNumber)
 
   const resetInputHandler = () => {
     setEnteredValue('')
@@ -45,7 +47,7 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ children }) => {
     setConfirmed(true)
     setEnteredValue('')
     setSelectedNumber(chosenNumber)
-    Keyboard.dismiss()
+    hideKeyboard()
   }
 
   let confirmedOutput: React.ReactNode
@@ -55,7 +57,7 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ children }) => {
       <Card style={styles.summaryContainer}>
         <Text>You selected:</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <CustomButton>Start Game</CustomButton>
+        <CustomButton onPress={startGameHandler}>Start Game</CustomButton>
       </Card>
     )
   }
