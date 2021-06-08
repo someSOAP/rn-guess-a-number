@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { RegText } from '@components/RegText'
 import { CustomButton } from '@components/CustomButton'
 import { Card } from '@components/Card'
 import { NumberContainer } from '@components/NumberContainer'
@@ -18,10 +19,12 @@ export const GameOverScreen: FC<IGameOverScreenProps> = ({
   return (
     <View style={styles.screen}>
       <Card>
-        <Text style={styles.textSecondary}>The number was {usersNumber}!</Text>
-        <Text style={styles.textMain}>The Game is Over in </Text>
+        <RegText style={styles.textSecondary}>
+          The number was {usersNumber}!
+        </RegText>
+        <RegText style={styles.textMain}>The Game is Over in </RegText>
         <NumberContainer>{numberOfGuesses}</NumberContainer>
-        <Text style={styles.textSecondary}>guesses!</Text>
+        <RegText style={styles.textSecondary}>guesses!</RegText>
         <CustomButton onPress={onNewGame}>Start New Game</CustomButton>
       </Card>
     </View>

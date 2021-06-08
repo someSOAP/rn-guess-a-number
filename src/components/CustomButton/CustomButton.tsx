@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native'
+import { RegText } from '@components/RegText'
 import { PRIMARY } from '@color'
 interface ICustomButtonProps {
   onPress?: () => void
@@ -18,7 +19,7 @@ export const CustomButton: FC<ICustomButtonProps> = ({
 
   return (
     <TouchableOpacity style={touchableStyle} onPress={onPress}>
-      <Text style={{ ...styles.btnText, color: textColor }}>{children}</Text>
+      <RegText style={{ ...styles.btnText, color: textColor }}>{children}</RegText>
     </TouchableOpacity>
   )
 }

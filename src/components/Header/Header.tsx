@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SECONDARY } from '@color'
+import { BoldText } from '@components/BoldText'
 interface IHeaderProps {
   text?: string
 }
@@ -8,7 +9,7 @@ interface IHeaderProps {
 export const Header: FC<IHeaderProps> = ({ text }) => {
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}>{text}</Text>
+      <BoldText style={styles.headerTitle}>{text}</BoldText>
     </View>
   )
 }

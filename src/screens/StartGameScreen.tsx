@@ -11,6 +11,7 @@ import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
 import { Input } from '@components/Input'
 import { NumberContainer } from '@components/NumberContainer'
+import { BoldText } from '@components/BoldText'
 import { SECONDARY } from '@color'
 import { OPEN_SANS_BOLD } from '@constants/fonts'
 
@@ -66,7 +67,7 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ onStartGame }) => {
   return (
     <TouchableWithoutFeedback onPress={hideKeyboard}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <BoldText style={styles.title}>Start a New Game!</BoldText>
         <Card style={styles.inputContainer}>
           <Text>Select a Number</Text>
           <Input
@@ -104,7 +105,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontFamily: OPEN_SANS_BOLD,
     fontSize: 20,
     marginVertical: 10,
   },
