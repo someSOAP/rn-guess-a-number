@@ -12,6 +12,7 @@ import { CustomButton } from '@components/CustomButton'
 import { Input } from '@components/Input'
 import { NumberContainer } from '@components/NumberContainer'
 import { SECONDARY } from '@color'
+import { OPEN_SANS_BOLD } from '@constants/fonts'
 
 interface IStartGameScreenProps {
   onStartGame: (selectedNumber: number) => void
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    fontFamily: OPEN_SANS_BOLD,
     fontSize: 20,
     marginVertical: 10,
   },

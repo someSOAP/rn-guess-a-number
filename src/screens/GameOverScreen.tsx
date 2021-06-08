@@ -6,16 +6,19 @@ import { NumberContainer } from '@components/NumberContainer'
 
 interface IGameOverScreenProps {
   numberOfGuesses: number
+  usersNumber: number
   onNewGame: () => void
 }
 
 export const GameOverScreen: FC<IGameOverScreenProps> = ({
   onNewGame,
   numberOfGuesses,
+  usersNumber,
 }) => {
   return (
     <View style={styles.screen}>
       <Card>
+        <Text style={styles.textSecondary}>The number was {usersNumber}!</Text>
         <Text style={styles.textMain}>The Game is Over in </Text>
         <NumberContainer>{numberOfGuesses}</NumberContainer>
         <Text style={styles.textSecondary}>guesses!</Text>

@@ -1,14 +1,34 @@
 import React, { FC, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-
+import * as Font from 'expo-font'
+import AppLoading from 'expo-app-loading'
 import { Header } from '@components/Header'
 import { StartGameScreen } from '@screens/StartGameScreen'
 import { GameScreen } from '@screens/GameScreen'
 import { GameOverScreen } from '@screens/GameOverScreen'
+import { OPEN_SANS, OPEN_SANS_BOLD } from '@constants/fonts'
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    [OPEN_SANS]: require('./assets/fonts/OpenSans-Regular.ttf'),
+    [OPEN_SANS_BOLD]: require('./assets/fonts/OpenSans-Bold.ttf'),
+  })
+}
 
 const App: FC = () => {
-  const [userNumber, setUserNumber] = useState<number>()
+  const [dataLoading, setDataLoaded] = useState<boolean>(false)
+  const [userNumber, setUserNumber] = useState<number>(0)
   const [guessRounds, setGuessRounds] = useState(0)
+
+  if (!dataLoading) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onError={console.error}
+        onFinish={() => setDataLoaded(true)}
+      />
+    )
+  }
 
   const startGameHandler = (selectedNumber: number) => {
     setGuessRounds(0)
@@ -35,6 +55,7 @@ const App: FC = () => {
   if (guessRounds > 0) {
     content = (
       <GameOverScreen
+        usersNumber={userNumber}
         onNewGame={startNewGameHandler}
         numberOfGuesses={guessRounds}
       />
