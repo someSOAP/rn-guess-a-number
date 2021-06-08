@@ -19,6 +19,11 @@ const App: FC = () => {
     setGuessRounds(numOfRounds)
   }
 
+  const startNewGameHandler = () => {
+    setUserNumber(0)
+    setGuessRounds(0)
+  }
+
   let content = <StartGameScreen onStartGame={startGameHandler} />
 
   if (userNumber && guessRounds === 0) {
@@ -28,7 +33,12 @@ const App: FC = () => {
   }
 
   if (guessRounds > 0) {
-    content = <GameOverScreen />
+    content = (
+      <GameOverScreen
+        onNewGame={startNewGameHandler}
+        numberOfGuesses={guessRounds}
+      />
+    )
   }
 
   return (

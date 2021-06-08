@@ -67,7 +67,7 @@ export const GameScreen: FC<IGameScreenProps> = ({
       currentGuess
     )
     setRounds((prev) => {
-      return prev++
+      return prev + 1
     })
     setCurrentGuess(nextNumber)
   }
