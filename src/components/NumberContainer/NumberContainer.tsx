@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { RegText } from '@components/RegText'
+import { View, StyleSheet } from 'react-native'
+import { CustomText } from '@components/CustomText'
 import { PRIMARY } from '@color'
 
 interface INumberContainerProps {
@@ -10,7 +10,7 @@ interface INumberContainerProps {
 export const NumberContainer: FC<INumberContainerProps> = ({ children }) => {
   return (
     <View style={styles.container}>
-      <RegText style={styles.text}>{children}</RegText>
+      <CustomText style={styles.text}>{children}</CustomText>
     </View>
   )
 }

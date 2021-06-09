@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { RegText } from '@components/RegText'
+import { View, StyleSheet, Image } from 'react-native'
+import { CustomText } from '@components/CustomText'
 import { CustomButton } from '@components/CustomButton'
 import { Card } from '@components/Card'
 import { NumberContainer } from '@components/NumberContainer'
+import { PRIMARY } from '@color'
 
 interface IGameOverScreenProps {
   numberOfGuesses: number
@@ -19,12 +20,26 @@ export const GameOverScreen: FC<IGameOverScreenProps> = ({
   return (
     <View style={styles.screen}>
       <Card>
-        <RegText style={styles.textSecondary}>
+        <View style={styles.imageContainer}>
+          <Image
+            // fadeDuration={10000}
+            // source={{
+            //   uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
+            // }}
+            source={require('../../assets/game_over.png')}
+            style={styles.image}
+          />
+        </View>
+
+        <CustomText style={styles.textSecondary}>
           The number was {usersNumber}!
-        </RegText>
-        <RegText style={styles.textMain}>The Game is Over in </RegText>
+        </CustomText>
+        <CustomText style={styles.textMain}>
+          The <CustomText style={styles.primaryText}>Game</CustomText> is Over
+          in
+        </CustomText>
         <NumberContainer>{numberOfGuesses}</NumberContainer>
-        <RegText style={styles.textSecondary}>guesses!</RegText>
+        <CustomText style={styles.textSecondary}>guesses!</CustomText>
         <CustomButton onPress={onNewGame}>Start New Game</CustomButton>
       </Card>
     </View>
@@ -44,6 +59,20 @@ const styles = StyleSheet.create({
   textSecondary: {
     fontSize: 20,
     paddingBottom: 20,
+  },
+  primaryText: {
+    color: PRIMARY,
+  },
+  imageContainer: {
+    alignSelf: 'stretch',
+    borderRadius: 200,
+    backgroundColor: PRIMARY,
+    maxHeight: 200,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 })
 

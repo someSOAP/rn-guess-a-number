@@ -2,11 +2,7 @@ import React, { FC } from 'react'
 import { StyleSheet, Text, TextProps } from 'react-native'
 import { OPEN_SANS } from '@constants/fonts'
 
-interface IBodyTextProps extends TextProps {
-  children?: React.ReactText[] | string | number
-}
-
-export const RegText: FC<IBodyTextProps> = ({
+export const CustomText: FC<TextProps> = ({
   children,
   style = {},
   ...props
@@ -25,4 +21,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default RegText
+export default CustomText

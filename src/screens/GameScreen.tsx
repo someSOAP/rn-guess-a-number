@@ -1,9 +1,10 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
 import { partial } from 'lodash'
-import { View, StyleSheet, Text, Alert } from 'react-native'
+import { View, StyleSheet, Alert, Image } from 'react-native'
 import { NumberContainer } from '@components/NumberContainer'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
+import { BoldText } from '@components/BoldText'
 
 interface IGameScreenProps {
   userChoice: number
@@ -77,7 +78,7 @@ export const GameScreen: FC<IGameScreenProps> = ({
 
   return (
     <View style={styles.screen}>
-      <Text>Opponent`s guess: </Text>
+      <BoldText>Opponent`s guess: </BoldText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <CustomButton onPress={onLowerHandler}>LOWER</CustomButton>

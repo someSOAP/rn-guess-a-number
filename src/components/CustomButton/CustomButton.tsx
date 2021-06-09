@@ -1,25 +1,31 @@
 import React, { FC } from 'react'
-import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native'
-import { RegText } from '@components/RegText'
+import {
+  StyleSheet,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+} from 'react-native'
+import { CustomText } from '@components/CustomText'
 import { PRIMARY } from '@color'
 interface ICustomButtonProps {
   onPress?: () => void
   children?: string
-  textColor?: string
+  textStyle?: TextStyle
   style?: ViewStyle
 }
 
 export const CustomButton: FC<ICustomButtonProps> = ({
   onPress,
   children,
-  textColor = 'white',
+  textStyle = {},
   style = {},
 }) => {
   const touchableStyle = Object.assign({}, styles.btn, style)
+  const textStyles = Object.assign({}, styles.btnText, textStyle)
 
   return (
     <TouchableOpacity style={touchableStyle} onPress={onPress}>
-      <RegText style={{ ...styles.btnText, color: textColor }}>{children}</RegText>
+      <CustomText style={textStyles}>{children}</CustomText>
     </TouchableOpacity>
   )
 }
