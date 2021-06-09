@@ -1,10 +1,11 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
 import { partial } from 'lodash'
-import { View, StyleSheet, Alert, Image } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import { NumberContainer } from '@components/NumberContainer'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
 import { BoldText } from '@components/BoldText'
+import { Ionicons } from '@expo/vector-icons'
 
 interface IGameScreenProps {
   userChoice: number
@@ -81,8 +82,12 @@ export const GameScreen: FC<IGameScreenProps> = ({
       <BoldText>Opponent`s guess: </BoldText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-        <CustomButton onPress={onLowerHandler}>LOWER</CustomButton>
-        <CustomButton onPress={onGreaterHandler}>GREATER</CustomButton>
+        <CustomButton onPress={onLowerHandler}>
+          <Ionicons name="md-remove" color="white" /> LOWER
+        </CustomButton>
+        <CustomButton onPress={onGreaterHandler}>
+          GREATER <Ionicons name="md-add" color="white" />
+        </CustomButton>
       </Card>
     </View>
   )

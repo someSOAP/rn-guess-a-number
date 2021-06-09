@@ -2,29 +2,26 @@ import React, { FC } from 'react'
 import {
   StyleSheet,
   TouchableOpacity,
-  ViewStyle,
+  TouchableOpacityProps,
   TextStyle,
 } from 'react-native'
 import { CustomText } from '@components/CustomText'
 import { PRIMARY } from '@color'
-interface ICustomButtonProps {
-  onPress?: () => void
-  children?: string
+
+interface ICustomButtonProps extends TouchableOpacityProps {
   textStyle?: TextStyle
-  style?: ViewStyle
 }
 
 export const CustomButton: FC<ICustomButtonProps> = ({
-  onPress,
   children,
   textStyle = {},
-  style = {},
+  ...props
 }) => {
-  const touchableStyle = Object.assign({}, styles.btn, style)
+  const touchableStyle = Object.assign({}, styles.btn, props.style)
   const textStyles = Object.assign({}, styles.btnText, textStyle)
 
   return (
-    <TouchableOpacity style={touchableStyle} onPress={onPress}>
+    <TouchableOpacity {...props} style={touchableStyle}>
       <CustomText style={textStyles}>{children}</CustomText>
     </TouchableOpacity>
   )
