@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
 import { partial } from 'lodash'
-import { View, StyleSheet, Alert, ScrollView } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView, FlatList } from 'react-native'
 import { NumberContainer } from '@components/NumberContainer'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
@@ -97,16 +97,20 @@ export const GameScreen: FC<IGameScreenProps> = ({
         </CustomButton>
       </Card>
       <View style={styles.scrollViewWrapper}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          {pastGuesses.map((guess, index) => (
-            <View style={styles.pastGuess} key={index}>
+        <FlatList
+          data={pastGuesses}
+          keyExtractor={(item) => String(item)}
+          renderItem={({ item }) => (
+            <View style={styles.pastGuess}>
               <CustomText style={styles.guessedItemText}>
                 Guessed number:{' '}
-                <BoldText style={styles.guessedNumber}>{guess}</BoldText>
+                <BoldText style={styles.guessedNumber}>{item}</BoldText>
               </CustomText>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
+        {/*<ScrollView contentContainerStyle={styles.scrollView}>*/}
+        {/*</ScrollView>*/}
       </View>
     </View>
   )
