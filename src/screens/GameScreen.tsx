@@ -1,11 +1,13 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
 import { partial } from 'lodash'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView } from 'react-native'
 import { NumberContainer } from '@components/NumberContainer'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
 import { BoldText } from '@components/BoldText'
 import { Ionicons } from '@expo/vector-icons'
+import CustomText from '@components/CustomText'
+import { PRIMARY, SECONDARY } from '@color'
 
 interface IGameScreenProps {
   userChoice: number
@@ -34,14 +36,19 @@ export const GameScreen: FC<IGameScreenProps> = ({
 }) => {
   const currentLow = useRef(1)
   const currentHigh = useRef(100)
-  const [rounds, setRounds] = useState(0)
-  const [currentGuess, setCurrentGuess] = useState<number>(
-    generateRandomBetween(currentLow.current, currentHigh.current, userChoice)
+
+  const initialGuess = generateRandomBetween(
+    currentLow.current,
+    currentHigh.current,
+    userChoice
   )
+  const [currentGuess, setCurrentGuess] = useState<number>(initialGuess)
+
+  const [pastGuesses, setPastGuesses] = useState<number[]>([])
 
   useEffect(() => {
     if (currentGuess === userChoice) {
-      onGameOver(rounds)
+      onGameOver(pastGuesses.length + 1)
     }
   }, [currentGuess])
 
@@ -60,7 +67,7 @@ export const GameScreen: FC<IGameScreenProps> = ({
     if (direction === 'LOWER') {
       currentHigh.current = currentGuess
     } else {
-      currentLow.current = currentGuess
+      currentLow.current = currentGuess + 1
     }
 
     const nextNumber = generateRandomBetween(
@@ -68,10 +75,10 @@ export const GameScreen: FC<IGameScreenProps> = ({
       currentHigh.current,
       currentGuess
     )
-    setRounds((prev) => {
-      return prev + 1
-    })
     setCurrentGuess(nextNumber)
+    setPastGuesses((prevState) => {
+      return [nextNumber, ...prevState]
+    })
   }
 
   const onLowerHandler = partial(nextGuessHandler, 'LOWER')
@@ -89,6 +96,18 @@ export const GameScreen: FC<IGameScreenProps> = ({
           GREATER <Ionicons name="md-add" color="white" />
         </CustomButton>
       </Card>
+      <View style={styles.scrollViewWrapper}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          {pastGuesses.map((guess, index) => (
+            <View style={styles.pastGuess} key={index}>
+              <CustomText style={styles.guessedItemText}>
+                Guessed number:{' '}
+                <BoldText style={styles.guessedNumber}>{guess}</BoldText>
+              </CustomText>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   )
 }
@@ -105,6 +124,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: '80%',
+  },
+  scrollViewWrapper: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+  },
+  pastGuess: {
+    marginVertical: 5,
+    padding: 46,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: PRIMARY,
+  },
+  guessedItemText: {
+    fontSize: 20,
+  },
+  guessedNumber: {
+    color: SECONDARY,
   },
 })
 
