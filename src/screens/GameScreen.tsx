@@ -99,6 +99,7 @@ export const GameScreen: FC<IGameScreenProps> = ({
       <View style={styles.scrollViewWrapper}>
         <FlatList
           data={pastGuesses}
+          style={styles.scrollView}
           keyExtractor={(item) => String(item)}
           renderItem={({ item }) => (
             <View style={styles.pastGuess}>
