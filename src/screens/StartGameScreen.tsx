@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
 } from 'react-native'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
@@ -13,7 +14,6 @@ import { Input } from '@components/Input'
 import { NumberContainer } from '@components/NumberContainer'
 import { BoldText } from '@components/BoldText'
 import { SECONDARY } from '@color'
-import { OPEN_SANS_BOLD } from '@constants/fonts'
 
 interface IStartGameScreenProps {
   onStartGame: (selectedNumber: number) => void
@@ -128,8 +128,10 @@ const styles = StyleSheet.create({
     backgroundColor: SECONDARY,
   },
   inputContainer: {
-    width: 300,
-    maxWidth: '80%',
+    width: '80%',
+    minWidth: 300,
+    maxWidth: '95%',
+    alignItems: 'center',
   },
   summaryContainer: {
     marginVertical: 20,

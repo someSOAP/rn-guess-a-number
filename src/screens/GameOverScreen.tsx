@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, Dimensions } from 'react-native'
 import { CustomText } from '@components/CustomText'
 import { CustomButton } from '@components/CustomButton'
 import { Card } from '@components/Card'
@@ -22,10 +22,6 @@ export const GameOverScreen: FC<IGameOverScreenProps> = ({
       <Card>
         <View style={styles.imageContainer}>
           <Image
-            // fadeDuration={10000}
-            // source={{
-            //   uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
-            // }}
             source={require('../../assets/game_over.png')}
             style={styles.image}
           />
@@ -54,11 +50,11 @@ const styles = StyleSheet.create({
   },
   textMain: {
     fontSize: 25,
-    paddingTop: 20,
+    paddingTop: Dimensions.get('window').height > 600 ? 20 : 5,
   },
   textSecondary: {
     fontSize: 20,
-    paddingBottom: 20,
+    paddingBottom: Dimensions.get('window').height > 600 ? 20 : 5,
   },
   primaryText: {
     color: PRIMARY,
@@ -67,6 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     borderRadius: 200,
     backgroundColor: PRIMARY,
+    height: Dimensions.get('window').height / 4,
     maxHeight: 200,
     overflow: 'hidden',
   },

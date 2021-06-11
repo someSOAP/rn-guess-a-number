@@ -1,6 +1,13 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
 import { partial } from 'lodash'
-import { View, StyleSheet, Alert, ScrollView, FlatList } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  FlatList,
+  Dimensions,
+} from 'react-native'
 import { NumberContainer } from '@components/NumberContainer'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
@@ -48,7 +55,9 @@ export const GameScreen: FC<IGameScreenProps> = ({
 
   useEffect(() => {
     if (currentGuess === userChoice) {
-      onGameOver(pastGuesses.length + 1)
+      setTimeout(() => {
+        onGameOver(pastGuesses.length + 1)
+      }, 1000)
     }
   }, [currentGuess])
 
@@ -90,10 +99,10 @@ export const GameScreen: FC<IGameScreenProps> = ({
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <CustomButton onPress={onLowerHandler}>
-          <Ionicons name="md-remove" color="white" /> LOWER
+          <Ionicons name="md-remove" color="white" />
         </CustomButton>
         <CustomButton onPress={onGreaterHandler}>
-          GREATER <Ionicons name="md-add" color="white" />
+          <Ionicons name="md-add" color="white" />
         </CustomButton>
       </Card>
       <View style={styles.scrollViewWrapper}>
@@ -110,8 +119,6 @@ export const GameScreen: FC<IGameScreenProps> = ({
             </View>
           )}
         />
-        {/*<ScrollView contentContainerStyle={styles.scrollView}>*/}
-        {/*</ScrollView>*/}
       </View>
     </View>
   )
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: Dimensions.get('window').height > 600 ? 20 : 10,
     width: 300,
     maxWidth: '80%',
   },
