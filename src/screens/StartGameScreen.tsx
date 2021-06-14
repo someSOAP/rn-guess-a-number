@@ -6,7 +6,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native'
 import { Card } from '@components/Card'
 import { CustomButton } from '@components/CustomButton'
@@ -14,6 +15,7 @@ import { Input } from '@components/Input'
 import { NumberContainer } from '@components/NumberContainer'
 import { BoldText } from '@components/BoldText'
 import { SECONDARY } from '@color'
+import { useWindow } from '@utils/hooks'
 
 interface IStartGameScreenProps {
   onStartGame: (selectedNumber: number) => void
@@ -23,6 +25,10 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ onStartGame }) => {
   const [enteredValue, setEnteredValue] = useState<string>('')
   const [confirmed, setConfirmed] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number>(0)
+
+  const window = useWindow()
+
+  const portrait = window.height > window.width
 
   const numberInputHandler = (inputText: string) => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ''))
@@ -65,36 +71,43 @@ export const StartGameScreen: FC<IStartGameScreenProps> = ({ onStartGame }) => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={hideKeyboard}>
-      <View style={styles.screen}>
+    <ScrollView>
+      <KeyboardAvoidingView behavior="padding">
         <BoldText style={styles.title}>Start a New Game!</BoldText>
-        <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            autoCapitalize="none"
-            autoCorrect={false}
-            maxLength={2}
-            keyboardType="number-pad"
-            onChangeText={numberInputHandler}
-            value={enteredValue}
-          />
-          <View style={styles.buttonContainer}>
-            <CustomButton
-              style={styles.resetButton}
-              onPress={resetInputHandler}
-            >
-              Reset
-            </CustomButton>
-            <CustomButton style={styles.button} onPress={confirmInputHandler}>
-              Confirm
-            </CustomButton>
+        <TouchableWithoutFeedback onPress={hideKeyboard}>
+          <View style={styles.screen}>
+            <Card style={styles.inputContainer}>
+              <Text>Select a Number</Text>
+              <Input
+                style={styles.input}
+                blurOnSubmit
+                autoCapitalize="none"
+                autoCorrect={false}
+                maxLength={2}
+                keyboardType="number-pad"
+                onChangeText={numberInputHandler}
+                value={enteredValue}
+              />
+              <View style={styles.buttonContainer}>
+                <CustomButton
+                  style={styles.resetButton}
+                  onPress={resetInputHandler}
+                >
+                  Reset
+                </CustomButton>
+                <CustomButton
+                  style={styles.button}
+                  onPress={confirmInputHandler}
+                >
+                  Confirm
+                </CustomButton>
+              </View>
+            </Card>
+            {confirmedOutput}
           </View>
-        </Card>
-        {confirmedOutput}
-      </View>
-    </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 
@@ -105,6 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    textAlign: 'center',
     fontSize: 20,
     marginVertical: 10,
   },

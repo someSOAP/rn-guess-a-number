@@ -57,7 +57,7 @@ export const GameScreen: FC<IGameScreenProps> = ({
     if (currentGuess === userChoice) {
       setTimeout(() => {
         onGameOver(pastGuesses.length + 1)
-      }, 1000)
+      }, 250)
     }
   }, [currentGuess])
 
