@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { SECONDARY } from '@color'
+import { View, StyleSheet, Platform } from 'react-native'
+import { PRIMARY, SECONDARY } from '@color'
 import { BoldText } from '@components/BoldText'
 interface IHeaderProps {
   text?: string
@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 90,
     paddingTop: 36,
-    backgroundColor: SECONDARY,
+    backgroundColor: Platform.OS === 'ios' ? SECONDARY : PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
   headerTitle: {
-    color: 'black',
+    color: Platform.OS === 'ios' ? 'black' : 'white',
     fontSize: 18,
   },
 })
