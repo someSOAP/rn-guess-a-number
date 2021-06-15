@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { Header } from '@components/Header'
@@ -63,10 +63,10 @@ const App: FC = () => {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <Header text="Guess a number!" />
       {content}
-    </View>
+    </SafeAreaView>
   )
 }
 

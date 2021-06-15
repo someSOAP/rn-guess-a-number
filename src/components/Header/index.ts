@@ -1,3 +1,3 @@
-import Header from './Header'
-export * from './Header'
+import Header from './Header.android'
+export * from './Header.android'
 export default Header
